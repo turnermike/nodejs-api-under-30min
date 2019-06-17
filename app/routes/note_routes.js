@@ -1,6 +1,7 @@
 // app/routes/note_routes.js
 
 const mongoose = require('mongoose');
+const ObjectID = require('mongodb').ObjectID;
 
 const Notes = mongoose.model('notes');
 
@@ -10,6 +11,23 @@ module.exports = function(app, db) {
   app.get('/notes', async (req, res) => {
     const allNotes = await Notes.find({});
     res.send(allNotes);
+  });
+
+  // get note by id
+  app.post('/notes/:id', (req, res) => {
+
+    const details = { '_id':  req.params.id };
+
+    Notes.findOne(details, (err, item) => {
+      if (err) {
+        console.log('Error: ', err);
+        res.send({ 'error': err });
+      }else{
+        console.log('item', item);
+        res.send(item);
+      }
+    });
+
   });
 
   // create new note
@@ -28,15 +46,26 @@ module.exports = function(app, db) {
     // const updateResult = Notes.updateOne( note, (err, result) => {
     const updateResult = Notes.create( note, (err, result) => {
 
-      if (err) console.log('Error: ', err);
+      if (err) res.send('Error: ', err);
 
-      console.log('result', result);
+      // console.log('result', result);
+      res.send(result)
 
     });
 
-    res.send('hi');
-    // res.send(allNotes);
+  });
 
+  // delete note by id
+  app.delete('/notes/:id', (req, res) => {
+
+    const details = { '_id': new ObjectID(req.params.id) };
+    Notes.deleteOne(details, (err, items) => {
+
+      if (err) res.send('Error: ', err);
+
+      res.send('Note ' + req.params.id + ' deleted!');
+
+    })
   });
 
 
