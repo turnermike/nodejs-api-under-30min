@@ -39,19 +39,33 @@ module.exports = function(app, db) {
       body: req.body.title,
       dateAdded: new Date()
     };
-    console.log('note',   note);
+    // console.log('note',   note);
 
-    // const allNotes = await Notes.find({});
-
-    // const updateResult = Notes.updateOne( note, (err, result) => {
     const updateResult = Notes.create( note, (err, result) => {
 
       if (err) res.send('Error: ', err);
 
-      // console.log('result', result);
       res.send(result)
+      // console.log('result', result);
 
     });
+
+  });
+
+  // update a note
+  app.put('/notes/:id', (req, res) => {
+
+    // filter/query document/object
+    const query = { '_id': new ObjectID(req.params.id) };
+    // update document
+    const note = { title: req.query.title, body: req.query.body, dateUpdated: new Date() };
+    // options
+    const options = { upsert: true };
+
+    const result = Notes.updateOne(query, note, options).exec();
+
+    res.send(result);
+
 
   });
 
@@ -67,8 +81,5 @@ module.exports = function(app, db) {
 
     })
   });
-
-
-  app.get('/test', (req, res) => { res.send('hi'); });
 
 };
