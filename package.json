@@ -1,0 +1,26 @@
+{
+  "name": "noteable",
+  "version": "1.0.0",
+  "description": "Tutorial: https://medium.com/free-code-camp/building-a-simple-node-js-api-in-under-30-minutes-a07ea9e390d2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/Hi-hatConsulting/nodejs-api-under-30min.git"
+  },
+  "author": "Mike Turner",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Hi-hatConsulting/nodejs-api-under-30min#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^2.2.16",
+    "mongoose": "^5.5.15"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
