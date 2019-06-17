@@ -21,6 +21,6 @@ Mongo Shell:
 `mongo "mongodb+srv://noteable-1s4py.mongodb.net/test" --username noteable`
 
 MongoDB Compass:
-`mongodb+srv://noteable:kNsLHXXsX6gV3e20ajbwb@noteable-1s4py.mongodb.net/noteable-dev`
+`mongodb+srv://noteable:<password>@noteable-1s4py.mongodb.net/noteable-dev`
 
 
